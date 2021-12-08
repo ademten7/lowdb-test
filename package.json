@@ -1,0 +1,25 @@
+{
+    "name": "day7_lowdb",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "dev": "nodemon app.js",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ademten7/lowdb-test.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ademten7/lowdb-test/issues"
+    },
+    "homepage": "https://github.com/ademten7/lowdb-test#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "lowdb": "^1.0.0"
+    }
+}

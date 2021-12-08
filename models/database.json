@@ -1,0 +1,30 @@
+{
+  "name": "Naqvi",
+  "users": [
+    {
+      "id": 7,
+      "email": "testing@reqres.in",
+      "first_name": "syed",
+      "last_name": "Lawson",
+      "avatar": "https://reqres.in/img/faces/7-image.jpg"
+    },
+    {
+      "id": 8,
+      "email": "lindsay.ferguson@reqres.in",
+      "first_name": "Lindsay",
+      "last_name": "Ferguson",
+      "avatar": "https://reqres.in/img/faces/8-image.jpg"
+    },
+    {
+      "id": 9,
+      "email": "testing@reqres.in",
+      "first_name": "Abbas",
+      "last_name": "Nuri",
+      "avatar": "https://reqres.in/img/faces/7-image.jpg",
+      "address": "Kiel",
+      "country": "DE"
+    }
+  ],
+  "records": [],
+  "orders": []
+}
