@@ -5,7 +5,14 @@ const faker = require("faker");
 //first we imported schema object
 const { Schema } = mongoose;
 
-//this is structure of   user document
+//this is structure of user document not a constructor
+
+// we can create a variable and add in the schema
+// let addSchema = new Schema({
+//     city:{type:String},
+//     country:{type:String}
+
+// })
 const userSchema = new Schema({
   firstName: { type: String, required: true, unique: true },
   lastName: {
@@ -15,39 +22,33 @@ const userSchema = new Schema({
   },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  department: { type: String, required: true },
   //   address: addSchema
 });
 
-// let addSchema = new Schema({
-//     city:{type:String},
-//     country:{type:String}
-
-// })
-
 //inside the users we want to store in this schema.
 //model means collection
-//this is a constructor thats why we use upper  case
+//this is a constructor thats why we use upper  case UsersCollection
 const UsersCollection = mongoose.model("users", userSchema);
 
-mongoose.connect(
-  "mongodb://127.0.0.1:27017/record-live-shop",
-
-  () => {
-    console.log("connected to Mongodb");
-  }
-);
+// to find the connection write==> mongo on the terminal //mongodb://127.0.0.1:27017
+mongoose.connect("mongodb://127.0.0.1:27017/record-live-shop", () => {
+  console.log("connected to Mongodb");
+});
 mongoose.connection.on("disconnected", () => console.log("disconnected db"));
 mongoose.connection.on("connected", () => console.log("connected ...."));
 mongoose.connection.on("error", (err) =>
   console.log("error message", err.message)
 );
 
+//to create 20 user at the same time
 for (let i = 0; i < 20; i++) {
   const user = new UsersCollection({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
+    department: faker.commerce.department(),
   });
   user.save();
 }
@@ -65,9 +66,13 @@ UsersCollection.find().then((data) => {
 });
 
 //to find single user
-// UsersCollection.findOne({ id: "61d2cde43b4a0496fc454bc2" }).then((data) => {
-//   console.log(data);
-// });
+UsersCollection.findOne({ id: "61d2cde43b4a0496fc454bc2" }).then((data) => {
+  console.log({ data });
+});
 
 // UsersCollection.findOneAndReplace
 //UsersCollection.deleteOne
+UsersCollection.findByIdAndDelete({ id: "61d2cde43b4a0496fc454bc2" });
+UsersCollection.findOne({ id: "61d2cde43b4a0496fc454bc2" }).then((data) => {
+  console.log({ data });
+});

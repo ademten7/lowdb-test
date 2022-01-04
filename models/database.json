@@ -2,27 +2,18 @@
   "name": "Naqvi",
   "users": [
     {
-      "id": 7,
-      "email": "testing@reqres.in",
-      "first_name": "syed",
-      "last_name": "Lawson",
+      "id": 1639406691579,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "avatar": ""
+    },
+    {
+      "id": 1639406698705,
+      "first_name": "adem",
+      "last_name": "Ten",
+      "email": "tenadem82@gmail.com",
       "avatar": "https://reqres.in/img/faces/7-image.jpg"
-    },
-    {
-      "id": 8,
-      "email": "lindsay.ferguson@reqres.in",
-      "first_name": "Lindsay",
-      "last_name": "Ferguson",
-      "avatar": "https://reqres.in/img/faces/8-image.jpg"
-    },
-    {
-      "id": 9,
-      "email": "testing@reqres.in",
-      "first_name": "Abbas",
-      "last_name": "Nuri",
-      "avatar": "https://reqres.in/img/faces/7-image.jpg",
-      "address": "Kiel",
-      "country": "DE"
     }
   ],
   "records": [],

@@ -15,5 +15,5 @@ const db = low(adapter);
 // db.defaults({ users: [], records: [], orders: [] }).write();
 
 //  write()==>to save the data
-//after this comment it out
+//*************************************after this comment it out****************************
 module.exports = db;
