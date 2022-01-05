@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 //import usersCollection from models folder
 const UsersCollection = require("../models/UsersSchema");
 // const path = require("path");
@@ -23,6 +24,7 @@ router.get("/", async (req, res, next) => {
   try {
     //find all users
     const users = await UsersCollection.find();
+
     res.send({ success: true, data: users });
   } catch (err) {
     next(err);
@@ -30,9 +32,18 @@ router.get("/", async (req, res, next) => {
 });
 
 //Create new User
+
+//*********************************to hash the password
+
+//npm i bcrypt and import it inside the routers/usersRouter.js
+//this keyword is reference to userSchema where password is stored.
+//next()==> mongoose store function and go further
+
 router.post("/", async (req, res, next) => {
   try {
-    const user = new UsersCollection(req.body);
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+    const user = new UsersCollection({ ...req.body, password: hashPassword }); //take the all body an add password with bcrypt
+
     await user.save();
     res.json({ success: true, data: user });
   } catch (err) {
