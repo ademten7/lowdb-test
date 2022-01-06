@@ -42,9 +42,27 @@ const userSchema = new Schema(
     },
   }
 );
+
+//it show also fullname infotrmation
 userSchema.virtual("fullname").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
+
+userSchema.virtual("email_domain").get(function () {
+  return this.email.split("@")[1];
+});
+/*
+ {
+            "_id": "61d2d3ec1591b7db6ece130e",
+            "firstName": "Dorothea",
+            "lastName": "Rolfson",
+            "email": "Keshawn_Gusikowski@gmail.com",
+            "password": "DO5OsHJ096vmzlf",
+            "__v": 0,
+        ****    "fullname": "Dorothea Rolfson",********
+            "id": "61d2d3ec1591b7db6ece130e"
+        },
+*/
 
 //this is a constructor thats why we use upper  case
 //IT CREATES A "users" collection on  "record-live-shop" database
