@@ -14,7 +14,7 @@ const usersRoute = require("./routes/usersRoute");
 const indexRoute = require("./routes/indexRoute");
 const recordsRoute = require("./routes/recordsRoute");
 const ordersRoute = require("./routes/ordersRoute");
-
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 4001;
 
 //create mongoose connection
@@ -22,6 +22,15 @@ mongoose.connect("mongodb://127.0.0.1:27017/record-live-shop", () => {
   console.log("connection established...... with mongo");
 });
 
+//custom middleware==> everytime see the app.use(myMiddleware) ==> execute this
+//middle ware is
+const myMiddleware = (req, res, next) => {
+  console.log("hello world");
+  req.hello = "world";
+  next(); //go down and execute
+};
+
+//middleware
 app.use(express.json());
 
 ////////////////////      TO GET DATA FROM FROM FRONTEND
@@ -34,6 +43,7 @@ app.use(express.json());
 
 //cors middleware: ==>it is  secure way the communication from one server to another server
 //to connect frontend
+
 //cors middleware
 app.use(cors());
 // app.use(cors({ origin: "http://localhost:3000" }));
@@ -47,6 +57,9 @@ app.use(cors());
 // });
 
 //instead of this we can install npm i cors;
+app.use(cookieParser());
+
+app.use(myMiddleware);
 
 // ************************  PATHS   ******************************
 //go to routes

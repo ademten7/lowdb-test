@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 //import usersCollection from models folder
 const UsersCollection = require("../models/UsersSchema");
+const validationMiddlewares = require("../middlewares/ValidationRules");
+
 // const path = require("path");
 // const fs = require("fs");
 // const db = require("../models/db");
@@ -38,17 +40,22 @@ router.get("/", async (req, res, next) => {
 //this keyword is reference to userSchema where password is stored.
 //next()==> mongoose store function and go further
 
-router.post("/", async (req, res, next) => {
-  try {
-    const hashPassword = bcrypt.hashSync(req.body.password, 10);
-    const user = new UsersCollection({ ...req.body, password: hashPassword }); //take the all body an add password with bcrypt
+router.post(
+  "/",
+  validationMiddlewares,
 
-    await user.save();
-    res.json({ success: true, data: user });
-  } catch (err) {
-    next(err);
+  async (req, res, next) => {
+    try {
+      const hashPassword = bcrypt.hashSync(req.body.password, 10);
+      const user = new UsersCollection({ ...req.body, password: hashPassword }); //take the all body an add password with bcrypt
+
+      await user.save();
+      res.json({ success: true, data: user });
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
 //Update user
