@@ -24,6 +24,7 @@
         "express": "^4.17.1",
         "faker": "^5.5.3",
         "lowdb": "^1.0.0",
-        "mongoose": "^6.1.4"
+        "mongoose": "^6.1.4",
+        "nodemon": "^2.0.15"
     }
 }

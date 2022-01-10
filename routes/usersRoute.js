@@ -24,7 +24,6 @@ router.get("/", async (req, res, next) => {
   try {
     //find all users
     const users = await UsersCollection.find();
-
     res.send({ success: true, data: users });
   } catch (err) {
     next(err);

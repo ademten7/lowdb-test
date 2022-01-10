@@ -14,6 +14,9 @@ const RecordSchema = new Schema({
   image: { type: String, required: true },
   createAt: { type: Date, default: Date.now },
 });
+
+//this is a constructor thats why we use upper  case
+//IT CREATES A "records" collection on  "record-live-shop" database in mongoBD Compass
 const RecordsCollection = mongoose.model("records", RecordSchema);
 
 for (let i = 0; i < 20; i++) {
@@ -27,8 +30,7 @@ for (let i = 0; i < 20; i++) {
   record.save();
 }
 
-//this is a constructor thats why we use upper  case
-//IT CREATES A "records" collection on  "record-live-shop" database in mongoBD Compass
+
 module.exports = RecordsCollection;
 
 //in app.js import RecordsCollection.

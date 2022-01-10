@@ -13,6 +13,8 @@ const { Schema } = mongoose;
 //     country:{type:String}
 
 // })
+
+
 const userSchema = new Schema({
   firstName: { type: String, required: true, unique: true },
   lastName: {
@@ -28,13 +30,18 @@ const userSchema = new Schema({
 
 //inside the users we want to store in this schema.
 //model means collection
-//this is a constructor thats why we use upper  case UsersCollection
+//this is a constructor thats why we use upper  case (UsersCollection)
+//we store it inside the UsersCollection
+//mangoose create a users collection inside the record-live-shop
 const UsersCollection = mongoose.model("users", userSchema);
 
 // to find the connection write==> mongo on the terminal //mongodb://127.0.0.1:27017
+//this is local url. second argument is callback.
 mongoose.connect("mongodb://127.0.0.1:27017/record-live-shop", () => {
   console.log("connected to Mongodb");
 });
+
+//this are listeners and optional
 mongoose.connection.on("disconnected", () => console.log("disconnected db"));
 mongoose.connection.on("connected", () => console.log("connected ...."));
 mongoose.connection.on("error", (err) =>
@@ -50,12 +57,13 @@ for (let i = 0; i < 20; i++) {
     password: faker.internet.password(),
     department: faker.commerce.department(),
   });
+  //to save into the  database
   user.save();
 }
 
 //in mongoose all the code is async
 
-//to run the code ==> node seed
+//to run the code write ==> node seed
 
 //we will use fake users
 //npm i faker
