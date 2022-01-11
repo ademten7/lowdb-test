@@ -40,6 +40,16 @@ let validationMiddlewares = [
       }, {});
 
       next({ status: 401, message: message });
+      /*
+      "success": false,
+    "message": {
+        "firstName": "please firstname shouldn't be less than 5 chars long",
+        "lastName": "please enter something as lastname",
+        "email": "Email already exist",
+        "password": "please dont use common words as password"
+    }
+}
+      */
     }
   },
 ];
