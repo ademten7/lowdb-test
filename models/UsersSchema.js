@@ -31,6 +31,7 @@ const userSchema = new Schema(
     },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    token:{type:String},
     adress: {
       //address is optional not required. if you dont write it does not throws error.
       city: { type: String },

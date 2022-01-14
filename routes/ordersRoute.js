@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const OrdersCollection = require("../models/OrdersSchema");
+//const OrdersCollection = require("../models/OrdersSchema"); from controllers
 const {
   getOrders,
   createOrder,

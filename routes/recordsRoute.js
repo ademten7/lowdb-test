@@ -1,4 +1,5 @@
 const express = require("express");
+const authentication = require("../middlewares/auth");
 const router = express.Router();
 const RecordsCollection = require("../models/RecordsSchema");
 
@@ -18,6 +19,9 @@ const users = JSON.parse(data).users; */
 //Read Users
 //endpoint /users
 router.get("/", async (req, res, next) => {
+  //authorization
+  // const code = req.header("code")
+
   try {
     const records = await RecordsCollection.find();
     res.send({ success: true, data: records });
@@ -27,7 +31,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //Create new User
-router.post("/", async (req, res, next) => {
+router.post("/", authentication, async (req, res, next) => {
   try {
     const record = new RecordsCollection(req.body);
     await record.save();
@@ -39,7 +43,7 @@ router.post("/", async (req, res, next) => {
 
 //Request method PUT (replacing existing resource) and PATCH (updating existing resource)
 //Update user
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", authentication, async (req, res, next) => {
   try {
     const record = await RecordsCollection.findByIdAndUpdate(
       req.params.id,
@@ -53,7 +57,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //Patch
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:id", authentication, async (req, res, next) => {
   try {
     const record = await RecordsCollection.findByIdAndUpdate(
       req.params.id,
@@ -68,7 +72,7 @@ router.patch("/:id", async (req, res, next) => {
 
 //Delete request
 //delete record
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", authentication, async (req, res, next) => {
   try {
     const record = await RecordsCollection.findByIdAndDelete(req.params.id);
     res.send({ success: true, data: record });

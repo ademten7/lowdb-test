@@ -25,6 +25,7 @@
         "express": "^4.17.1",
         "express-validator": "^6.14.0",
         "faker": "^5.5.3",
+        "jsonwebtoken": "^8.5.1",
         "lowdb": "^1.0.0",
         "mongoose": "^6.1.4",
         "nodemon": "^2.0.15"

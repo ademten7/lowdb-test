@@ -3,10 +3,13 @@ const UsersCollection = require("../models/UsersSchema");
 
 let validationMiddlewares = [
   body("firstName")
-    .isLength({ min: 5, max: 20 }) //body("firstname").isLength({min:5})==> i want to control this condition
-    .withMessage("please firstname shouldn't be less than 5 chars long")
+    .isLength({ min: 2 }) //body("firstname").isLength({min:5})==> i want to control this condition
+    .withMessage("please firstname shouldn't be less than 2 chars long")
     .trim(), //trim is sanitisation.(do this)
-  check("lastName", "please enter something as lastname").not().isEmpty(),
+  body("lastName")
+    .isLength({ min: 2 }) //body("firstname").isLength({min:5})==> i want to control this condition
+    .withMessage("please lastname shouldn't be less than 2 chars long")
+    .trim(), //trim is sanitisation.(do this)
   body("email")
     .isEmail()
     .withMessage("please provide a valid email address")

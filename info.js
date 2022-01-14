@@ -48,4 +48,27 @@ to call the method inside userRecords UsersCollection.findByName
 
 
 
-*/ 
+//Middleware
+whenever we see next ==> it is normal function which consist of req,res,next
+//bunlari istedigimiz yere koyup oradan calistirabiliriz. Nereye koyarsak orada calisir.
+app in icine koyarsak her clistirmada calisir.
+mesela userCollection in icinde get requesta  koyarsak sadece gette calsir
+
+
+ */ 
+
+
+/**********************************Validation;
+npm i express validator 
+
+**********************   Validation
+just validate the data
+check or body  methoddda mesaji direkt olarak  in icine de  yazabiliriz
+
+******************** Sanitazation
+
+
+Autotication==if the user hat authoruzed do something
+
+
+*/

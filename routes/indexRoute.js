@@ -1,11 +1,9 @@
 const express = require("express");
-const path = require("path");
+
 const router = express.Router();
+const {getIndex} = require("../controllers/indexController")
 
 //endpoint //get request
-router.get("/", (req, res) => {
-  //resolve absolute path using path module
-  res.sendFile(path.resolve(__dirname, "../views/index.html"));
-});
+router.get("/", getIndex);
 
 module.exports = router;

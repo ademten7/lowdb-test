@@ -19,17 +19,16 @@ const RecordSchema = new Schema({
 //IT CREATES A "records" collection on  "record-live-shop" database in mongoBD Compass
 const RecordsCollection = mongoose.model("records", RecordSchema);
 
-for (let i = 0; i < 20; i++) {
-  const record = new RecordsCollection({
-    title: faker.music.genre(),
-    artist: faker.name.middleName(),
-    year: Math.floor(Math.random() * 40) + 1980,
-    price: faker.commerce.price(),
-    image: faker.image.imageUrl(),
-  });
-  record.save();
-}
-
+// for (let i = 0; i < 20; i++) {
+//   const record = new RecordsCollection({
+//     title: faker.music.genre(),
+//     artist: faker.name.middleName(),
+//     year: Math.floor(Math.random() * 40) + 1980,
+//     price: faker.commerce.price(),
+//     image: faker.image.imageUrl(),
+//   });
+//   record.save();
+// }
 
 module.exports = RecordsCollection;
 

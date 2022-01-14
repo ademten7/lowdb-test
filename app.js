@@ -4,6 +4,15 @@
 2.create a db.json in models folder
 
 */
+
+//MVC architecture design pattern
+// M stands for MODEL (database)
+// V stands for VIEW (frontend)
+// C stands for CONTROLLER (functionality)
+/* The Model contains only the pure application data, it contains no logic describing how to present the data to a user.
+The View presents the model’s data to the user. The view knows how to access the model’s data, but it does not know what this data means or what the user can do to manipulate it.
+The Controller exists between the view and the model. It listens to events triggered by the view (or another external source) and executes the appropriate reaction to these events. In most cases, the reaction is to call a method on the model. Since the view and the model are connected through a notification mechanism, the result of this action is then automatically reflected in the view. */
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -15,7 +24,11 @@ const indexRoute = require("./routes/indexRoute");
 const recordsRoute = require("./routes/recordsRoute");
 const ordersRoute = require("./routes/ordersRoute");
 const cookieParser = require("cookie-parser");
-const PORT = process.env.PORT || 4001;
+//we dont put authentication in app.use("/users") because we need to check first it is correct user or not
+const authentication = require("./middlewares/auth");
+const PORT = process.env.PORT || 4000;
+//sudo kill -9 $(sudo lsof -t -i:4000)
+//lsof -t -i:4000
 
 //create mongoose connection
 mongoose.connect("mongodb://127.0.0.1:27017/record-live-shop", () => {
@@ -25,7 +38,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/record-live-shop", () => {
 //custom middleware==> everytime see the app.use(myMiddleware) ==> execute this
 //middle ware is
 const myMiddleware = (req, res, next) => {
-  console.log("hello world");
   req.hello = "world";
   next(); //go down and execute
 };
@@ -45,7 +57,8 @@ app.use(express.json());
 //to connect frontend
 
 //cors middleware
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", exposedHeaders: ["token"] })); //to see the token on front end side
+//"http://localhost:3000"==> only this user can see the token
 // app.use(cors({ origin: "http://localhost:3000" }));
 
 // app.use((req, res, next) => {
@@ -59,9 +72,9 @@ app.use(cors());
 //instead of this we can install npm i cors;
 app.use(cookieParser());
 
-app.use(myMiddleware);
+// app.use(myMiddleware);
 
-// ************************  PATHS   ******************************
+// ************************  PATHS and MIDDLEWARES  ******************************
 //go to routes
 //index route
 app.use("/", indexRoute);
@@ -69,11 +82,15 @@ app.use("/", indexRoute);
 app.use("/users", usersRoute);
 
 //records route
-app.use("/records", recordsRoute);
+app.use("/records", recordsRoute); //if authentication(from middleware folder) is correct go recordsRoute requests
 
 //orders route
-app.use("/orders", ordersRoute);
-
+app.use("/orders", authentication, ordersRoute); //if authentication(from middleware folder) go recordsRoute requests
+app.get("/verifytoken", authentication, (req, res, next) => {
+  const user = req.user;
+  console.log(req.user);
+  res.send({ success: true, data: user });
+});
 //************************************ */ handling 404 page not found
 //if you enter wrong url show this page
 //put this always before the app.listen
